@@ -1,0 +1,74 @@
+/* Responsive images and media */
+img {
+	max-width: 80%; 
+	height: auto;
+	display: block;
+	margin: 10px auto;
+}
+
+/* Make SVG scale down on small viewports */
+svg {
+	max-width: 100%;
+	height: auto;
+}
+
+body {
+	box-sizing: border-box;
+}
+
+/* Section spacing */
+.section {
+  padding: 24px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.section.intro {
+  padding-top: 12px;
+}
+
+.titles h2 {
+  margin: 0 0 12px 0;
+  text-decoration: underline;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f4;
+}
+
+header {
+  background: #d12525; /* siat color red */
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+section {
+  background: white;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 10px;
+}
+.section.svg {
+  background: rgb(247, 247, 247);
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 10px;
+}
+h2 {
+  color: black;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

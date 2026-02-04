@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Visualizations</h1>
+    </header>
+
+        <section class="section">
+            <div class="titles">
+                <h2>Sleep Tracking Visualization</h2>
+            </div>
+            <p>Visualization of my sleep hours for each day of the week:</p>
+            <div id="sleep-chart"></div>
+        </section>
+        
+
+
+    <section class="section svg">
+        <div class="titles">
+            <h2>SVG Art</h2>
+        </div>
+        <svg width="800" height="800">
+            <circle cx="400" cy="400" r="200" fill="red"></circle>
+            <ellipse cx="400" cy="500" rx="120" ry="50" fill="white"></ellipse>
+            <circle cx="400" cy="480" r="20" fill="brown"></circle>
+            <polygon points="240,300 250,90 320,220" fill="red"></polygon><!-- Ears -->
+            <polygon points="260,260 260,150 295,215" fill="white"></polygon>
+            <polygon points="560,300 550,90 480,220" fill="red"></polygon>
+            <polygon points="540,260 540,150 505,215" fill="white"></polygon>
+            <circle cx="330" cy="360" r="30" fill="black"></circle><!-- Eyes -->
+            <circle cx="333" cy="358" r="10" fill="white"></circle>
+            <circle cx="470" cy="360" r="30" fill="black"></circle>
+            <circle cx="473" cy="358" r="10" fill="white"></circle>
+
+        </svg>
+    </section>
+
+    <section class="section">
+        <a href="index.html">← Back to Home</a>
+    </section>
+    
+    <script src="vis.js"></script>
+
+</body>
+</html>
