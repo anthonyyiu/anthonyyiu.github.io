@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A3 Vega-Lite</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite-api@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <header class="site-header">
+        <h1>A3 Vega-Lite</h1>
+    </header>
+
+    <section class="section">
+        <h2>Video Game Sales Analysis</h2>
+        <ol>
+        <li>Game Name: Nominal <br>
+Most games (8718, 53%) only have a single release for a single console, but there are some outliers, the most extreme of such are LEGO Marvel Super Heroes with 9 different console releases and Madden NFL 08 for 8 different platforms.</li>
+        <br>
+<li>Platform: Nominal<br>
+Most platforms have multiple games, but there are 2 platforms that have only a single game to their name- GG and PCFX which have Sonic the Hedgehog2 and Blue Breaker respectively.
+In contrast, the DS platform has the most games, at 2163 with the PS2 at a close second with 2161 games.
+PSP would be the median with 1213 games.</li>
+<br>
+        <li>Year: ordinal, temporal<br>
+The data lists the games published from 1980 to 2020(-2022), so the median is 2000. The mode is 2008-2010 as it shows the most games were published during that period.
+Observations: Game publishing accelerated starting from 1992 and practically doubled between 2000 and 2002! Although, it also halved between 2010 and 2012, and even further quartered from 2014 to 2016, going from around 1200 to 347.</li>
+<br>        
+<li>Genre: Nominal<br>
+Action makes up the most popular genre with 3316 games (20% overall) and puzzle being the least popular with 582 games (3.5%). Roleplaying is the median at 1488 games (9%).
+Observations: There might be some inaccuracy with the large "misc" genre that makes up 10% overall games consisting of minor genres that would be listed at the bottom of the list otherwise.
+There doesn't seem to be a pattern of genre popularity besides the "thinking" genres, "puzzle" and "strategy" being last.</li>
+       <br>
+<li>Publisher: Nominal<br>
+Electronic arts are the largest game publisher with 1351 games (8.1%),Devolver Digital being the second smallest at 2 games (0.012%), and 194 developers tied for last with only 1 game each.</li>
+       <br>
+<li>NA Sales: Quantitative<br>
+The large majority of games only sold 1-2 million copies in NA, (98% of games).
+The biggest outlier, with the most sales, was Wii Sports for the Nintendo Wii, at 41.49 million sales! It has a range difference of ~40 million sales from 98% of other games, and a ~11 million sales difference from the second highest selling game- Super Mario Bros. for the Nintendo NES.
+There is no exact middle/ median, as there are no games that sold between 16-22 million, the closest game at 23.2 million was Tetris for the Nintendo Gameboy.
+Observations: The majority of NA sales are dominated by Nintendo, as the top 13 best selling games are all from Nintendo except for Kinect Adventures! by Microsoft Game Studios for the X360 at 6th place with 14.97 million sales.</li>
+       <br>
+<li>EU sales: Quantitative  <br>
+The large majority of games only sold 1-2 million copies in EU, (99% of games).
+The extreme outlier, with the most sales, was Wii Sports for the Nintendo Wii, at 29.02 million sales! No other game comes close to the amount of EU sales, with the second closest game- Mario Kart Wii for the Nintendo Wii sitting at 12.88 million sales. Wii Sports has a range difference of ~28 million from 99% of other games and a range difference of ~16 million from the second closest game; The second closest game has less than half of Wii Sports' sales!
+Observations: Nintendo has a similar dominance in EU as in NA, owning the top 12 highest grossing games, besides number 4, Grand Theft Auto V by Take-Two Interactive for the PS3 at 9.27 million sales.</li>
+       <br>
+<li>JP Sales: Quantitative<br>
+The large majority of games only sold 1-2 million copies in JP, (97% of games).
+The biggest outlier, with the most sales, was Pokémon Red/Blue for the Nintendo GB, at 10.22 million sales! There is a range gap of ~3 million to the second highest grossing game of Pokémon Gold/ Silver for the Nintendo GB at 7.2 million sales.
+Observations: Roleplaying is a very popular genre in Japan, making up half of the top 10 games, the most popular of which being from the Pokémon series, but showing consistent popularity even to the top 60 games. Nintendo has dominance over the JP games market, owning the top 8 most popular games. I did find it shocking that the JP games sales were much lower in comparison to NA or EU, only having a range of 10.22 million, while NA and EU had 41.49 million and 29.02 million respectively, especially since Nintendo is a JP publisher, though I surmise it may be due to population and demographic differences, since the top NA and EU game was Wii sports and that is a family game.</li>
+       <br>
+<li>Other sales: Quantitative<br>
+The large majority of games only sold 1-2 million copies in the "other" miscellaneous countries, (>99% of games).
+The most popular games was Grand Theft Auto: San Andreas by Take-Two Interactive for the PS2 at 10.57 million sales. There is a range difference of ~9 million from the other 99% of games, and an range difference of ~2million from the second most popular game- Wii sports for the Nintendo Wii at 8.46 million sales.
+Observations: Hard to draw a pattern given the compilation of miscellaneous countries, but there is a noticeable popularity of action, sports, and racing genres, that make up the top 6 games.</li>
+      <br>
+<li>Global sales: Quantitative <br>
+The large majority of games only sold 1-2 million copies globally (99% of games).
+The extreme outlier was Wii Sports for the Nintendo Wii at 82.74 million sales. With a range difference of ~42 million sales from the second highest selling game- Super Mario Bros for the Nintendo NES, which has less than half of Wii Sports' total sales!
+Observations: Nintendo makes up for the top 14 globally best selling games.</li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2>Visualization 1: Global Sales by Platform for Strategy Genre</h2>
+        <p> Which platform has the highest global sales for Strategy games?</p>
+         <div id="vis1"></div>
+             <p> Answer: The PC platform has the highest global sales for Strategy games, with a total of 45.88 million sales.</p>
+         <br>
+         <p> What are the global sales per genre for the DS platform?</p>
+         <div id="vis2"></div>
+         <li>Misc-137.76</li>
+         <li>Simulation- 132.03</li>
+         <li>RolePlaying- 126.85</li>
+         <li>Action- 115.56</li>
+         <li>Puzzle-84.29</li>
+         <li>Platform-77.45</li>
+         <li>Adventure-47.29</li>
+         <li>Racing-38.64</li>
+         <li>Sports-31.83</li>
+         <li>Strategy-15.39</li>
+         <li>Shooter-8.2</li>
+         <li>Fighting-7.2</li>
+         <br>
+         <p> Reflection: The Strategy games were popular on PC,which makes sense given the mouse was beneficial for point and click decision making. The accessibility given by the PC set up is reflected by the high sales of Strategy games on PC, far more than any other platform.
+        
+            The DS, with its two screens, lended itself well towards unorthodox game design, which may explain why "misc" games its best selling genre. Followed closely by Simulation and Roleplaying, which can also make use of the DS's unique design, such as with popular games like Nintendogs and Pokemon. 
+         </p>
+    
+    </section>
+    
+    <section class="section">
+        <h2>Visualization 2: Sales Over Time by Platform and Genre</h2>
+        <p>How have PS2 and PS3 game sales changed over time?</p>
+        <div id="vis3"></div>
+        <p>Answer: The PS2 started in 2000 with 40 million sales, rose to 205.4 sales in 2002, dipped to 184.23 million in 2003, and peaked at 211.78 million in 2004. After that, sales slowly declined to 0 in 2011. </p>
+        <p>The PS3 started at 21.07 million sales in 2006. Its sales peaked in 2011 at 159.37 million just as the PS2 era ended. The sales took at dip in 2012 with 109.49 million sales, but rose once more in 2013 with 117.39 million sales before sharply declining until 2016. </p>
+        <br>
+        <p> How have Nintendo games sales changed over time?</p>
+        <div id="vis4"></div>
+        <p>Answer: Starting from 1983 with 10.96 million sales, Nintendo's sales have grown sporatically over time, peaking and dipping constantly. Presumably this is due to new platform releases. It peaked in 1985 with 49.95 million sales, and dipped in 1987 with 11.95 million sales. The sales then fluxuated between 20 and 65 million sales until 2003, when the games sales boomed suddenly to 205.61 million sales in 2006. Following this was a steep dip to 91.22 million sales in 2008, and resurgance in 2009 with 128.89 million sales and a slow decline afterwards until 2016. </p>
+        <br>
+        <p> Reflection: The PS2 had more popularity than the PS3 during its era, as shown by the larger peaks. Perhaps the PS3 opened to lower opening sales numbers was because of the pre-existing popularity of the PS2, especially since they had tied for sales in 2007. Although it peaked in 2011, it was not as popular as the PS2 even tough the PS2 sales had gone to zero by then. This may be caused by competition with other game platforms.
+
+        Publisher Nintendo had a very volitile sales history, until the Wii in 2006 that caused an all-time peak in sales. Through personal knowledge I recognize Nintendo is still a prominent publisher, so I suspect there may be incomplete data in the dataset, since it suggests Nintendo sales have been reduced to 0 by 2016.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Visualization 3: Regional Sales vs. Platform</h2>
+        <p>Compare the DS game sales across the different regions.</p>
+        <div id="vis5"></div>
+        <ul>NA: 390.71 million</ul>
+    <ul>Europe: 194.65 million</ul>
+    <ul>Japan: 175.57 million</ul>
+    <ul>Other: 60.53 million</ul>
+    <br>
+    <p>Compare the Wii game sales across the different regions.</p>
+        <div id="vis6"></div>
+        <ul>NA: 507.51 million</ul>
+    <ul>Europe: 268.38 million</ul>
+    <ul>Japan: 80.61 million</ul>
+    <ul>Other: 69.35 million</ul>
+    <br>
+    <p>Reflection: The DS had the most sales in NA, followed by Europe, Japan, and lastly the other regions. The Wii had the most sales in NA as well, followed by Europe, other regions, and lastly, Japan. This wass surprising given that not only was Nintendo a Japanese publisher, but the Wii was its most successful platform. This may be due to demographic differences, as the top selling game for the Wii was Wii Sports, which is a family game that may have more appeal in NA and EU than in JP.</p>
+    </section>
+    
+    <section class="section">
+        <h2>Visualization 4: Visual Story</h2>
+        <p>What are the regional sales for Wii Sports?</p>
+        <div id="vis7"></div>
+        <ul>North America: 41.49 million</ul>
+        <ul>Europe: 29.02 million</ul>
+        <ul>Japan: 3.77 million</ul>
+        <ul>Other: 8.46 million</ul>
+        <br>
+        <p>Reflection: Wii Sports shows strong sales in North America and Europe, with significantly lower sales in Japan. This aligns with the family-oriented nature of the game, which may appeal more to Western demographics. I chose this visualization be cause of the previous sections, I was curious about how Nintendo games performed in Japan, and especially Wii sports, given how that is the best selling games in NA and EU. I wanted to compare the sales across regions.</p>
+        <br>
+        <p>Circle Chart: Comparing EA Games and Nintendo Games by Amount of Games and Sales</p>
+        <div id="vis8"></div>
+        <p>Reflection: EA Games has 1351 games and 1116.96 million total sales, while Nintendo has 703 games and 1786.56 million total sales. This means the EA games has a ~0.82 million sales per game, while Nintendo has ~2.57 million sales per game. I chose this visualziation because I wanted to compare a JP publisher against an NA publisher, EA Games was chosen in particular because it had a sizeable amount of games compared to other publishers.</p>
+
+    <section class="section">
+        <a href="index.html" class="button">Back to Home</a>
+    </section>
+    
+    <script src="vis.js"></script>
+</body>
+</html></content>

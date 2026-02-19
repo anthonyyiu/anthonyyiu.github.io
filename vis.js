@@ -133,9 +133,218 @@ function drawSleepChart() {
   svgContainer.appendChild(svg);
 }
 
+// Vega-Lite visualizations for a3-vegalite.html
+const spec1 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "Dataset/videogames_wide.csv"},
+  "transform": [{"filter": "datum.Genre == 'Strategy'"}],
+  "mark": "bar",
+  "width": 700,
+"height": 500,
+  "title": "Total Global Sales by Strategy Genre (millions)",
+  "encoding": {
+    "x": {"field": "Platform", "type": "nominal", "sort": "-y"},
+    "y": {"field": "Global_Sales", "type": "quantitative", "aggregate": "sum"}
+  }
+};
+
+const spec2 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "Dataset/videogames_wide.csv"},
+  "transform": [{"filter": "datum.Platform == 'DS'"}],
+  "mark": "bar",
+  "width": 700,
+  "height": 500,
+  "title": "Total Global Sales by Genre for DS Platform (millions)",
+  "encoding": {
+    "x": {"field": "Genre", "type": "nominal", "sort": "-y"},
+    "y": {"field": "Global_Sales", "type": "quantitative", "aggregate": "sum"}
+  }
+};
+
+const spec3 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "Dataset/videogames_wide.csv"},
+  "transform": [{"filter": {"field": "Platform", "oneOf": ["PS2", "PS3"]}}],
+  "mark": "line",
+  "width": 800,
+  "height": 500,
+  "encoding": {
+    "x": {"field": "Year", "type": "temporal", "title": "Release Year"},
+    "y": {"field": "Global_Sales", "type": "quantitative", "aggregate": "sum", "title": "Total Global Sales (millions)"},
+    "color": {"field": "Platform", "type": "nominal", "title": "PlayStation Platform"}
+  }
+};
+const spec4 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "Dataset/videogames_wide.csv"},
+  "transform": [{"filter": "datum.Publisher == 'Nintendo'"}],
+  "mark": "line",
+  "width": 600,
+  "height": 400,
+  "title": "Nintendo Game Sales Over Time by Platform",
+  "encoding": {
+    "x": {"field": "Year", "type": "ordinal", "title": "Release Year"},
+    "y": {"field": "Global_Sales", "type": "quantitative", "aggregate": "sum", "title": "Total Global Sales (millions)"},
+  }
+};
+
+const spec5 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"values": [
+    {"Region": "North America", "Sales": 390.71}, // Replace with actual sums for DS
+    {"Region": "Europe", "Sales":194.65},
+    {"Region": "Japan", "Sales": 175.57},
+    {"Region": "Other", "Sales": 60.53}
+  ]},
+  "mark": "bar",
+  "width": 500,
+  "height": 400,
+  "title": "Nintendo DS: Regional Sales Comparison",
+  "encoding": {
+    "x": {"field": "Region", "type": "nominal", "sort": "-y", "title": "Region"},
+    "y": {"field": "Sales", "type": "quantitative", "title": "Total Sales (millions)"},
+    "color": {"field": "Region", "type": "nominal", "title": "Region"},
+    "tooltip": [
+      {"field": "Region", "type": "nominal"},
+      {"field": "Sales", "type": "quantitative"}
+    ]
+  }
+};
+
+const spec6 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"values": [
+    {"Region": "North America", "Sales": 507.51}, // Replace with actual sums for Wii
+    {"Region": "Europe", "Sales": 268.38},
+    {"Region": "Japan", "Sales": 80.61},
+    {"Region": "Other", "Sales": 69.35}
+  ]},
+  "mark": "bar",
+  "width": 500,
+  "height": 400,
+  "title": "Nintendo Wii: Regional Sales Comparison",
+  "encoding": {
+    "x": {"field": "Region", "type": "nominal", "sort": "-y", "title": "Region"},
+    "y": {"field": "Sales", "type": "quantitative", "title": "Total Sales (millions)"},
+    "color": {"field": "Region", "type": "nominal", "title": "Region"},
+    "tooltip": [
+      {"field": "Region", "type": "nominal"},
+      {"field": "Sales", "type": "quantitative"}
+    ]
+  }
+};
+
+const spec7 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"values": [
+    {"Region": "North America", "Sales": 41.49},
+    {"Region": "Europe", "Sales": 29.02},
+    {"Region": "Japan", "Sales": 3.77},
+    {"Region": "Other", "Sales": 8.46}
+  ]},
+  "mark": "bar",
+  "width": 500,
+  "height": 400,
+  "title": "Wii Sports: Gross Sales by Region",
+  "encoding": {
+    "x": {"field": "Region", "type": "nominal", "sort": "-y", "title": "Region"},
+    "y": {"field": "Sales", "type": "quantitative", "title": "Sales (millions)"},
+    "color": {"field": "Region", "type": "nominal", "title": "Region"},
+    "tooltip": [
+      {"field": "Region", "type": "nominal"},
+      {"field": "Sales", "type": "quantitative"}
+    ]
+  }
+};
+
+const spec8 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"values": [
+    {
+      "Publisher": "Nintendo",
+      "TotalSales": 1786.56,
+      "GameCount": 696,
+      "AvgSales": 2.57
+    },
+    {
+      "Publisher": "EA",
+      "TotalSales": 1116.96,
+      "GameCount": 1351,
+      "AvgSales": 0.83
+    }
+  ]},
+  "mark": "circle",
+  "width": 500,
+  "height": 300,
+  "title": "Nintendo vs EA: Total Sales (circle size = number of games)",
+  "encoding": {
+    "y": {"field": "Publisher", "type": "nominal", "title": "Publisher"},
+    "x": {"field": "TotalSales", "type": "quantitative", "title": "Total Sales (millions)"},
+    "size": {"field": "GameCount", "type": "quantitative", "title": "Number of Games"},
+    "color": {"field": "Publisher", "type": "nominal"},
+    "tooltip": [
+      {"field": "Publisher", "type": "nominal"},
+      {"field": "TotalSales", "type": "quantitative"},
+      {"field": "GameCount", "type": "quantitative"},
+      {"field": "AvgSales", "type": "quantitative"}
+    ]
+  }
+};
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', drawSleepChart);
+  document.addEventListener('DOMContentLoaded', () => {
+    drawSleepChart();
+    if (document.getElementById('vis1')) {
+      vegaEmbed('#vis1', spec1);
+    }
+    if (document.getElementById('vis2')) {
+      vegaEmbed('#vis2', spec2);
+    }
+    if (document.getElementById('vis3')) {
+      vegaEmbed('#vis3', spec3);
+    }
+    if (document.getElementById('vis4')) {
+      vegaEmbed('#vis4', spec4);
+    }
+    if (document.getElementById('vis5')) {
+      vegaEmbed('#vis5', spec5);
+    }
+    if (document.getElementById('vis6')) {
+      vegaEmbed('#vis6', spec6);
+    }
+    if (document.getElementById('vis7')) {
+      vegaEmbed('#vis7', spec7);
+    }
+    if (document.getElementById('vis8')) {
+      vegaEmbed('#vis8', spec8);
+    }
+  });
 } else {
   drawSleepChart();
+  if (document.getElementById('vis1')) {
+    vegaEmbed('#vis1', spec1);
+  }
+  if (document.getElementById('vis2')) {
+    vegaEmbed('#vis2', spec2);
+  }
+  if (document.getElementById('vis3')) {
+    vegaEmbed('#vis3', spec3);
+  }
+  if (document.getElementById('vis4')) {
+    vegaEmbed('#vis4', spec4);
+  }
+  if (document.getElementById('vis5')) {
+    vegaEmbed('#vis5', spec5);
+  }
+  if (document.getElementById('vis6')) {
+    vegaEmbed('#vis6', spec6);
+  }
+  if (document.getElementById('vis7')) {
+    vegaEmbed('#vis7', spec7);
+  }
+  if (document.getElementById('vis8')) {
+    vegaEmbed('#vis8', spec8);
+  }
 }
+
