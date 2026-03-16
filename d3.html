@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Visualization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <h1>D3 Interactive Circles</h1>
+    </header>
+
+    <section class="section">
+        <p>Clicking anywhere on the canvas adds a new shape where you click. After 2 clicks with circles, the polygons will be created with sides based on the number of clicks. 20 shapes max.</p>
+        <svg id="canvas" width="800" height="600"></svg>
+    </section>
+
+    <section class="section">
+        <a href="index.html">← Back to Home</a>
+    </section>
+
+    <script>
+        // In the click handler, before calling getPolygonPoints:
+
+        function getPolygonPoints(cx, cy, r, sides) {
+            const points = [];
+            for (let i = 0; i < sides; i++) {
+                const angle = (i * 2 * Math.PI) / sides - Math.PI / 2; // Start from top
+                const x = cx + r * Math.cos(angle);
+                const y = cy + r * Math.sin(angle);
+                points.push(`${x},${y}`);
+            }
+            return points.join(' ');
+        }
+
+        const svg = d3.select("#canvas");
+        let shapeCount = 0;
+
+        svg.on("click", function(event) {
+            if (shapeCount >= 20) {
+                alert("Maximum of 20 shapes reached!");
+                return;
+            }
+
+            shapeCount++;
+            const [x, y] = d3.pointer(event);
+
+            const g = svg.append("g");
+
+            if (shapeCount <= 2) {
+                g.append("circle")
+                    .attr("class", "circle")
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+                    .attr("r", 20);
+            } else {
+                const sides = shapeCount;
+            
+                const radius = 20 + (sides - 3) * 2; // To increase size based on Sides 
+                const points = getPolygonPoints(0, 0, radius, sides);
+                g.append("polygon")
+                    .attr("points", points)
+                    .attr("class", "polygon");
+            }
+
+            g.attr("transform", `translate(${x}, ${y}) scale(0)`)
+                .transition()
+                .duration(500)
+                .attr("transform", `translate(${x}, ${y}) scale(1)`);
+        });
+    </script>
+</body>
+</html>

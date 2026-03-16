@@ -12,6 +12,23 @@ svg {
 	height: auto;
 }
 
+#canvas {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.circle {
+    fill: steelblue;
+    stroke: white;
+    stroke-width: 2px;
+}
+
+.polygon {
+    fill: steelblue;
+    stroke: white;
+    stroke-width: 2px;
+}
+
 body {
 	box-sizing: border-box;
 }
